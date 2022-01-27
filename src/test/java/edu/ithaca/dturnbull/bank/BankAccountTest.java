@@ -27,11 +27,13 @@ class BankAccountTest {
         assertTrue(BankAccount.isEmailValid( "a@b.com"));   // valid email address
         assertFalse( BankAccount.isEmailValid(""));         // empty string
 
-        assertFalse( BankAccount.isEmailValid("@mansion.com"));         // no prefix
-        assertFalse( BankAccount.isEmailValid("tdog@gmail"));         // incomplete suffix
-        assertFalse( BankAccount.isEmailValid("@vim.x"));         // no prefix, invalid suffix
-        assertFalse( BankAccount.isEmailValid("tjones$@gmail.com"));         // invalid character in in prefix
-        assertFalse( BankAccount.isEmailValid("free%money@moneyman"));         // invalid character in in prefix, invalid suffix
+        assertFalse( BankAccount.isEmailValid("@mansion.com"));         // no prefix equivalence
+        assertFalse( BankAccount.isEmailValid("tdog@gmail"));         // incomplete suffix equivalence
+        assertFalse( BankAccount.isEmailValid("@vim.x"));         // no prefix, invalid suffix border
+        assertFalse( BankAccount.isEmailValid("tjones$@gmail.com"));         // invalid character in in prefix equivalence
+        assertFalse( BankAccount.isEmailValid("free%money@moneyman"));         // invalid character in in prefix, invalid suffix border
+
+        //Maybe a test where you check if an underscore, period, or dash is followed by one or more characters
 
         
     }
