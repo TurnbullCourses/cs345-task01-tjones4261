@@ -25,23 +25,38 @@ class BankAccountTest {
     @Test
     void isEmailValidTest(){
         assertTrue(BankAccount.isEmailValid( "a@b.com"));   // valid email address
+        assertTrue( BankAccount.isEmailValid("abs@man.com"));  //valid email: Proper prefix, proper suffix
+
         assertFalse( BankAccount.isEmailValid(""));         // empty string
 
+        //Only 1 @
+        assertTrue( BankAccount.isEmailValid("abs@man.com"));         //valid email: One @
+        assertFalse( BankAccount.isEmailValid("Mr@@supers.com"));         //Two @s
+        assertFalse( BankAccount.isEmailValid("Mrsupers.com"));         //Zero @s
+
+
+        //Prefix        
+        assertFalse( BankAccount.isEmailValid("Mr.@supers.com"));         //No character after period
+        assertFalse( BankAccount.isEmailValid("_Mr@supers.com"));         //No character before underscore
+        assertTrue( BankAccount.isEmailValid("Mr.Incredible@supers.com"));         //Valid email: prefix with period in the middle
         assertFalse( BankAccount.isEmailValid("@mansion.com"));         // no prefix equivalence
-        assertFalse( BankAccount.isEmailValid("tdog@gmail"));         // incomplete suffix equivalence
-        assertFalse( BankAccount.isEmailValid("@vim.x"));         // no prefix, invalid suffix border
+
         assertFalse( BankAccount.isEmailValid("tjones$@gmail.com"));         // invalid character in in prefix equivalence
-        assertFalse( BankAccount.isEmailValid("free%money@moneyman"));         // invalid character in in prefix, invalid suffix border
 
-        assertTrue( BankAccount.isEmailValid("abs@man.com"));         //valid email: Proper prefix, proper suffix
-        assertTrue( BankAccount.isEmailValid("Mr.Incredible@supers.com"));         //Valid email: prefix with period
-        assertFalse( BankAccount.isEmailValid("dewey@dec.imal.com"));         // Invalid character in suffix
-
+        //Domain
         assertFalse( BankAccount.isEmailValid("terry@crew$.org"));         // Invalid suffix character equivalence, border
         assertFalse( BankAccount.isEmailValid("richguy@money$talks.com"));         // Invalid suffix character equivalence, middle
         assertFalse( BankAccount.isEmailValid("terry@&crews.org"));         // Invalid suffix character equivalence border
 
-        
+        assertFalse( BankAccount.isEmailValid("tdog@gmail"));         // incomplete suffix equivalence
+
+        assertFalse( BankAccount.isEmailValid("tdog@vim.x"));         // no prefix, invalid suffix border
+        assertFalse( BankAccount.isEmailValid("tdog@vim."));         // no prefix, invalid suffix border
+
+        assertFalse( BankAccount.isEmailValid("dewey@dec.imal.com"));         // Invalid character in suffix
+        assertFalse( BankAccount.isEmailValid("dewey@%decimal.com"));         // Invalid character in suffix, border
+        assertFalse( BankAccount.isEmailValid("dewey@decimal.com$"));         // Invalid character in suffix, border
+
     }
 
     @Test
