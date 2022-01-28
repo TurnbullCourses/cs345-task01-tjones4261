@@ -43,14 +43,46 @@ public class BankAccount {
         if (email.indexOf('@') == 0){
             return false;
         }
-        else if (email.contains("$")==true||email.contains("%")==true){
+        else if (email.contains("$")==true||email.contains("%")==true||email.contains("&")==true){
             return false;
         }
         else if (!email.contains(".")==true){
             return false;
         }
-        else {
-            return true;
+        
+        if (email.indexOf('@') == -1 || email.indexOf('@') == 0){
+            return false;
         }
+        else {
+            //if there is more than 1 @
+            int count = 0;
+            for(int i = 0; i<email.length(); i++){
+                if(email.charAt(i) == '.'){
+                    count++;
+                }
+            }
+
+            if(count > 1 && email.indexOf(".")+1==email.indexOf("@") )
+                return false;
+
+            else if(count>1 && email.indexOf("@")<email.indexOf(".")){
+                return false;
+            }
+        }
+        if(email.lastIndexOf('.') > email.length() - 3){
+            return false;
+        }
+        else {
+            int count = 0;
+            for(int i = 0; i<email.length(); i++){
+                if(email.charAt(i) == '@'){
+                    count++;
+                }
+            }
+
+            if(count > 1)
+                return false;
+        }
+        return true;
     }
 }

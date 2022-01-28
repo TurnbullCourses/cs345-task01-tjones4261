@@ -37,7 +37,7 @@ class BankAccountTest {
 
         //Prefix        
         assertFalse( BankAccount.isEmailValid("Mr.@supers.com"));         //No character after period
-        assertFalse( BankAccount.isEmailValid("_Mr@supers.com"));         //No character before underscore
+        assertTrue( BankAccount.isEmailValid("_Mr@supers.com"));         //No character before underscore
         assertTrue( BankAccount.isEmailValid("Mr.Incredible@supers.com"));         //Valid email: prefix with period in the middle
         assertFalse( BankAccount.isEmailValid("@mansion.com"));         // no prefix equivalence
 
