@@ -10,7 +10,15 @@ class BankAccountTest {
     void getBalanceTest() {
         BankAccount bankAccount = new BankAccount("a@b.com", 200);
 
-        assertEquals(200, bankAccount.getBalance(), 0.001);
+        assertEquals(200, bankAccount.getBalance(), 0.001); //middle case
+
+        BankAccount bankAccount2 = new BankAccount("a@b.com", 0);
+
+        assertEquals(0, bankAccount2.getBalance(), 0.001); //zero balance equivalent
+
+        BankAccount bankAccount3 = new BankAccount("a@b.com", 1200.54);
+
+        assertEquals(1200.54, bankAccount3.getBalance(), 0.001); //decimal balance equivalent
     }
 
     @Test
