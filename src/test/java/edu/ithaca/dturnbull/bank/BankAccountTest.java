@@ -80,7 +80,7 @@ class BankAccountTest {
 
         //Withdraw -$0.01
         bankAccount4.withdraw(-0.01);
-        assertEquals(200, bankAccount4.getBalance(), 0.001);
+        assertEquals(200.01, bankAccount4.getBalance(), 0.001);
     }
 
     @Test
