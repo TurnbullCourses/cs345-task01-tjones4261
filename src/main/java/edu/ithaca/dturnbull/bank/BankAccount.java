@@ -46,6 +46,19 @@ public class BankAccount {
         return true;
     }
 
+    /**
+     * Deposits money into the bank account
+     * @param amount
+     * @throws IllegalArgumentException
+     */
+    public void deposit(double amount){
+        if(isAmountValid(amount)){
+            balance += amount;
+        }
+        else{
+            throw new IllegalArgumentException("Invalid Deposit Amount");
+        }
+    }
 
     public double getBalance(){
         return balance;
