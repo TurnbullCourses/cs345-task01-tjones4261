@@ -41,7 +41,7 @@ class BankAccountTest {
 
 
         //Over 2 decimal places
-        assertFalse(BankAccount.isAmountValid(1.5632)); //border
+        assertFalse(BankAccount.isAmountValid(1.5632));
         assertFalse(BankAccount.isAmountValid(3.67493));
         assertFalse(BankAccount.isAmountValid(12.0000100010001)); 
 

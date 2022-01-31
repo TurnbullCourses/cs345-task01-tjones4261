@@ -24,8 +24,26 @@ public class BankAccount {
      */
 
     public static boolean isAmountValid(double amount){
-        return false;
-
+        if(amount<0){
+            return false;
+        }
+        if(amount==0){
+            return true;
+        }
+        String str=Double.toString(amount);
+        for(int i=0; i<str.length();i++){
+            if(str.contains(".")){
+                String decimal=str.substring(str.lastIndexOf(".")+1);
+                double dvalues=Double.valueOf(decimal);
+                if(dvalues>2){
+                    return false;
+                }
+                return true;
+            }
+            
+        }
+        
+        return true;
     }
 
 
