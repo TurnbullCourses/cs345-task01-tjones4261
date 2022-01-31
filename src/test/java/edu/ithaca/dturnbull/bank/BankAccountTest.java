@@ -20,7 +20,36 @@ class BankAccountTest {
 
         assertEquals(1200.54, bankAccount3.getBalance(), 0.001); //decimal balance equivalent
     }
+    
+    @Test 
+    void isAmountValidTest(){
+        //Positive
+        assertTrue(BankAccount.isAmountValid(25));
+        assertTrue(BankAccount.isAmountValid(50));
+        assertTrue(BankAccount.isAmountValid(75));
+        assertTrue(BankAccount.isAmountValid(100));
+        assertTrue(BankAccount.isAmountValid(.01));
+        assertTrue(BankAccount.isAmountValid(100.01));
 
+        //Negative
+        assertFalse(BankAccount.isAmountValid(-25));
+        assertFalse(BankAccount.isAmountValid(-50));
+        assertFalse(BankAccount.isAmountValid(-75));
+        assertFalse(BankAccount.isAmountValid(-100));
+        assertFalse(BankAccount.isAmountValid(-.01));
+        assertFalse(BankAccount.isAmountValid(-100.01));
+
+
+        //Over 2 decimal places
+        assertFalse(BankAccount.isAmountValid(1.5632)); //border
+        assertFalse(BankAccount.isAmountValid(3.67493));
+        assertFalse(BankAccount.isAmountValid(12.0000100010001)); 
+
+        //0
+        assertTrue(BankAccount.isAmountValid(0.0));
+        assertTrue(BankAccount.isAmountValid(0));
+
+    }
     @Test
     void withdrawTest() throws InsufficientFundsException{
         BankAccount bankAccount = new BankAccount("a@b.com", 200);
