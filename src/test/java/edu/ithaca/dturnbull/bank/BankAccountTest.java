@@ -150,28 +150,32 @@ class BankAccountTest {
         assertEquals(25, bankAccount1.getBalance(), .001);
         assertEquals(75, bankAccount2.getBalance(), .001);
 
+        //transferring 0
         BankAccount.transfer(bankAccount1, bankAccount2, 0);
         assertEquals(25, bankAccount1.getBalance(), .001); //Border
         assertEquals(75, bankAccount2.getBalance(), .001); //Border
 
+        //transferring all the money from 1 account
         BankAccount.transfer(bankAccount2, bankAccount1, 75);
         assertEquals(100, bankAccount1.getBalance(), .001); //Border
         assertEquals(0, bankAccount2.getBalance(), .001); //Border
 
+        //2 decimal transfer
         BankAccount.transfer(bankAccount1, bankAccount2, 99.99);
         assertEquals(.01, bankAccount1.getBalance(), .001); //Border
         assertEquals(99.99, bankAccount2.getBalance(), .001); //Border
 
+        //Exceptions
         assertThrows(InsufficientFundsException.class,() -> BankAccount.transfer(bankAccount1, bankAccount2, 500));
-        assertThrows(InsufficientFundsException.class,() -> BankAccount.transfer(bankAccount1, bankAccount2, 729));//Border
+        assertThrows(InsufficientFundsException.class,() -> BankAccount.transfer(bankAccount1, bankAccount2, 729));
 
         assertThrows(IllegalArgumentException.class,() -> BankAccount.transfer(bankAccount1, bankAccount1, 0));
 
         assertThrows(IllegalArgumentException.class,() -> BankAccount.transfer(bankAccount1, bankAccount2, -25));
-        assertThrows(IllegalArgumentException.class,() -> BankAccount.transfer(bankAccount1, bankAccount2, -9.99)); //border
+        assertThrows(IllegalArgumentException.class,() -> BankAccount.transfer(bankAccount1, bankAccount2, -9.99)); 
 
         assertThrows(IllegalArgumentException.class,() -> BankAccount.transfer(bankAccount1, bankAccount2, 30.6594));
-        assertThrows(IllegalArgumentException.class,() -> BankAccount.transfer(bankAccount1, bankAccount1, 12.12901)); //border
+        assertThrows(IllegalArgumentException.class,() -> BankAccount.transfer(bankAccount1, bankAccount1, 12.12901));
     }
 
     @Test

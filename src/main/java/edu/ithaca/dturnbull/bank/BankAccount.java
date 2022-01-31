@@ -24,12 +24,15 @@ public class BankAccount {
      */
 
     public static boolean isAmountValid(double amount){
+        //negaitve
         if(amount<0){
             return false;
         }
+        //0
         if(amount==0){
             return true;
         }
+        //converts it to a string and counts the number of numbers after the decimal
         String str=Double.toString(amount);
         for(int i=0; i<str.length();i++){
             if(str.contains(".")){
@@ -52,6 +55,7 @@ public class BankAccount {
      * @throws IllegalArgumentException
      */
     public void deposit(double amount){
+        //checks if amount is valid
         if(isAmountValid(amount)){
             balance += amount;
         }
@@ -66,13 +70,14 @@ public class BankAccount {
             //sending money
             account1.withdraw(amount);
 
-            //receiving it
+            //receiving money
             account2.deposit(amount);
         }
 
         else{
             throw new IllegalArgumentException("Invalid Amount");
         }
+            //checks to make sure they're two different accounts
         if(account1 == account2){
             throw new IllegalArgumentException("Same account");
         }
@@ -94,6 +99,7 @@ public class BankAccount {
      * and the balance is unchanged
      */
     public void withdraw (double amount) throws InsufficientFundsException{
+        //Checks if amount is valid
         if(isAmountValid(amount)){
         if (amount <= balance){
             balance -= amount;
@@ -109,46 +115,51 @@ public class BankAccount {
 
 
     public static boolean isEmailValid(String email){
+        //checks if there's an @
         if (email.indexOf('@') == 0){
             return false;
         }
+        //invalid characters
         else if (email.contains("$")==true||email.contains("%")==true||email.contains("&")==true){
             return false;
         }
+        //if there's no period
         else if (!email.contains(".")==true){
             return false;
         }
-        
+        //if it starts with an @
         if (email.indexOf('@') == -1 || email.indexOf('@') == 0){
             return false;
         }
         else {
-            //if there is more than 1 @
+            //if there is more than 1 .
             int count = 0;
             for(int i = 0; i<email.length(); i++){
                 if(email.charAt(i) == '.'){
                     count++;
                 }
             }
-
+            //if there's an @ after the period
             if(count > 1 && email.indexOf(".")+1==email.indexOf("@") )
                 return false;
-
+            
             else if(count>1 && email.indexOf("@")<email.indexOf(".")){
                 return false;
             }
         }
+        //if theres more than 3 letters after the period
         if(email.lastIndexOf('.') > email.length() - 3){
             return false;
         }
         else {
+            
             int count = 0;
             for(int i = 0; i<email.length(); i++){
                 if(email.charAt(i) == '@'){
                     count++;
                 }
             }
-
+            //if there's more than 1 @
             if(count > 1)
                 return false;
         }
