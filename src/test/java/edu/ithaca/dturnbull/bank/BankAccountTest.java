@@ -119,6 +119,26 @@ class BankAccountTest {
         assertFalse( BankAccount.isEmailValid("dewey@decimal.com$"));         // Invalid character in suffix, border
 
     }
+    @Test
+    void depositTest() throws InsufficientFundsException{
+        BankAccount bankAccount = new BankAccount("a@b.com", 200);
+
+        //valid
+        bankAccount.deposit(32);
+        assertEquals(232, bankAccount.getBalance(), .001);
+        bankAccount.deposit(68);
+        assertEquals(300, bankAccount.getBalance(), .001);
+
+        //border
+        bankAccount.deposit(0.01);
+        assertEquals(300.01, bankAccount.getBalance(), .001);
+
+        //invalid
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(-5));
+
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(2.53423));
+
+    }
 
     @Test
     void constructorTest() {
