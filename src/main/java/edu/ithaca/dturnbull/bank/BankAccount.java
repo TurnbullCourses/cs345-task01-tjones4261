@@ -34,11 +34,11 @@ public class BankAccount {
         for(int i=0; i<str.length();i++){
             if(str.contains(".")){
                 String decimal=str.substring(str.lastIndexOf(".")+1);
-                double dvalues=Double.valueOf(decimal);
-                if(dvalues>2){
-                    return false;
+                double dvalues=decimal.length();
+                if(dvalues<=2){
+                    return true;
                 }
-                return true;
+                return false;
             }
             
         }
@@ -63,12 +63,17 @@ public class BankAccount {
      * and the balance is unchanged
      */
     public void withdraw (double amount) throws InsufficientFundsException{
+        if(isAmountValid(amount)){
         if (amount <= balance){
             balance -= amount;
         }
         else {
             throw new InsufficientFundsException("Not enough money");
         }
+    }
+    else{
+        throw new IllegalArgumentException("Invalid Amount");
+    }  
     }
 
 
