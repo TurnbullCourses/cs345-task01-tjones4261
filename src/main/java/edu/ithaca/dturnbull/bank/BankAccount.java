@@ -60,7 +60,7 @@ public class BankAccount {
         }
     }
 
-    public void transfer(BankAccount account1, BankAccount account2, double amount) throws InsufficientFundsException{
+    public static void transfer(BankAccount account1, BankAccount account2, double amount) throws InsufficientFundsException{
 
         if(isAmountValid(amount)){
             //sending money

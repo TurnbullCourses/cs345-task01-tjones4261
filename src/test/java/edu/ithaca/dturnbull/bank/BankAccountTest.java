@@ -139,6 +139,40 @@ class BankAccountTest {
         assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(2.53423));
 
     }
+    @Test
+    void transferTest() throws InsufficientFundsException{
+
+    BankAccount bankAccount1 = new BankAccount("a@b.com", 50);
+        BankAccount bankAccount2 = new BankAccount("b@a.com", 50);
+
+        //Valid non-negative amount and valid sender and receiver
+        BankAccount.transfer(bankAccount1, bankAccount2, 25);
+        assertEquals(25, bankAccount1.getBalance(), .001);
+        assertEquals(75, bankAccount2.getBalance(), .001);
+
+        BankAccount.transfer(bankAccount1, bankAccount2, 0);
+        assertEquals(25, bankAccount1.getBalance(), .001); //Border
+        assertEquals(75, bankAccount2.getBalance(), .001); //Border
+
+        BankAccount.transfer(bankAccount2, bankAccount1, 75);
+        assertEquals(100, bankAccount1.getBalance(), .001); //Border
+        assertEquals(0, bankAccount2.getBalance(), .001); //Border
+
+        BankAccount.transfer(bankAccount1, bankAccount2, 99.99);
+        assertEquals(.01, bankAccount1.getBalance(), .001); //Border
+        assertEquals(99.99, bankAccount2.getBalance(), .001); //Border
+
+        assertThrows(InsufficientFundsException.class,() -> BankAccount.transfer(bankAccount1, bankAccount2, 500));
+        assertThrows(InsufficientFundsException.class,() -> BankAccount.transfer(bankAccount1, bankAccount2, 729));//Border
+
+        assertThrows(IllegalArgumentException.class,() -> BankAccount.transfer(bankAccount1, bankAccount1, 0));
+
+        assertThrows(IllegalArgumentException.class,() -> BankAccount.transfer(bankAccount1, bankAccount2, -25));
+        assertThrows(IllegalArgumentException.class,() -> BankAccount.transfer(bankAccount1, bankAccount2, -9.99)); //border
+
+        assertThrows(IllegalArgumentException.class,() -> BankAccount.transfer(bankAccount1, bankAccount2, 30.6594));
+        assertThrows(IllegalArgumentException.class,() -> BankAccount.transfer(bankAccount1, bankAccount1, 12.12901)); //border
+    }
 
     @Test
     void constructorTest() {
