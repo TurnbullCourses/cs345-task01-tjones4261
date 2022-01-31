@@ -66,6 +66,11 @@ public class BankAccount {
 
     public static void transfer(BankAccount account1, BankAccount account2, double amount) throws InsufficientFundsException{
 
+         //checks to make sure they're two different accounts
+         if(account1 == account2){
+            throw new IllegalArgumentException("Same account");
+        }
+        
         if(isAmountValid(amount)){
             //sending money
             account1.withdraw(amount);
@@ -77,10 +82,7 @@ public class BankAccount {
         else{
             throw new IllegalArgumentException("Invalid Amount");
         }
-            //checks to make sure they're two different accounts
-        if(account1 == account2){
-            throw new IllegalArgumentException("Same account");
-        }
+           
 
     }
     public double getBalance(){
