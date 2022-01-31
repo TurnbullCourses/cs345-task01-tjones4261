@@ -60,6 +60,24 @@ public class BankAccount {
         }
     }
 
+    public void transfer(BankAccount account1, BankAccount account2, double amount) throws InsufficientFundsException{
+
+        if(isAmountValid(amount)){
+            //sending money
+            account1.withdraw(amount);
+
+            //receiving it
+            account2.deposit(amount);
+        }
+
+        else{
+            throw new IllegalArgumentException("Invalid Amount");
+        }
+        if(account1 == account2){
+            throw new IllegalArgumentException("Same account");
+        }
+
+    }
     public double getBalance(){
         return balance;
     }
