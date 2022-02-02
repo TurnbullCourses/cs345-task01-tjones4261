@@ -9,13 +9,17 @@ public class BankAccount {
      * @throws IllegalArgumentException if email is invalid
      */
     public BankAccount(String email, double startingBalance){
-        if (isEmailValid(email)){
-            this.email = email;
-            this.balance = startingBalance;
-        }
-        else {
+        if (!isEmailValid(email)){
             throw new IllegalArgumentException("Email address: " + email + " is invalid, cannot create account");
         }
+
+        //CODE REVIEW EDIT - included a check for starting balance validity
+        if(!isAmountValid(startingBalance)){
+            throw new IllegalArgumentException("Starting balance is invalid, cannot create account");
+        }
+
+        this.balance = startingBalance;
+        this.email = email;
     }
 
     /**
@@ -28,10 +32,12 @@ public class BankAccount {
         if(amount<0){
             return false;
         }
+
         //0
         if(amount==0){
             return true;
         }
+        
         //converts it to a string and counts the number of numbers after the decimal
         String str=Double.toString(amount);
         for(int i=0; i<str.length();i++){
@@ -66,6 +72,7 @@ public class BankAccount {
 
     public static void transfer(BankAccount account1, BankAccount account2, double amount) throws InsufficientFundsException{
 
+        //CODE REV EDIT: This should go before the other checks
          //checks to make sure they're two different accounts
          if(account1 == account2){
             throw new IllegalArgumentException("Same account");
